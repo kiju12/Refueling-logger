@@ -2,22 +2,24 @@ package kijko.web.models.forms;
 
 import kijko.web.models.Person;
 import kijko.web.models.Vehicle;
+import kijko.web.models.enums.FuelType;
 
-public class RefuelingForm {
+public class RefuelingForm<T extends Vehicle> {
 	
-	private Vehicle vehicle;
+	private T vehicle;
 	private Person person;
 	private Long meterStatusInThisTime;
 	private double litres;
 	private double priceForLiterInThisTime;
 	private String dateInString;
 	private String timeInString;
+	private FuelType fuelType;
 
 	public Vehicle getVehicle() {
 		return vehicle;
 	}
 
-	public void setVehicle(Vehicle vehicle) {
+	public void setVehicle(T vehicle) {
 		this.vehicle = vehicle;
 	}
 
@@ -69,5 +71,12 @@ public class RefuelingForm {
 		this.meterStatusInThisTime = meterStatusInThisTime;
 	}
 
-	
+	public FuelType getFuelType() {
+		return fuelType;
+	}
+
+	public void setFuelType(FuelType fuelType) {
+		this.fuelType = fuelType;
+	}
+
 }
