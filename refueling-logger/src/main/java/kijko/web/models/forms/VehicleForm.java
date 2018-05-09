@@ -1,6 +1,5 @@
 package kijko.web.models.forms;
 
-import kijko.web.models.enums.FuelType;
 import kijko.web.models.enums.VehicleType;
 
 public class VehicleForm {
@@ -9,7 +8,6 @@ public class VehicleForm {
 	private Long yearOfProduction;
 	private Long meterStatus;
 	private VehicleType vehicleType;
-	private FuelType fuelType;
 
 	public String getMark() {
 		return mark;
@@ -51,12 +49,5 @@ public class VehicleForm {
 		this.vehicleType = vehicleType;
 	}
 
-	public FuelType getFuelType() {
-		return fuelType;
-	}
-
-	public void setFuelType(FuelType fuelType) {
-		this.fuelType = fuelType;
-	}
 	
 }
