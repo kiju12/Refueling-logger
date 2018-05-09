@@ -21,6 +21,7 @@ public class PersonFormValidator implements Validator {
 	private static final String NULL_ERROR_MSG = "Imię lub nazwisko nie może mieć wartości null";
 	private static final String LENGTH_ERROR_MSG = "Imię lub nazwisko min. 3 i max. 32 znaki.";
 	private static final String EXISTS_ERROR_MSG = "Istnieje już osoba o tym imieniu i nazwisku.";
+	private static final String HAS_NUMBERS_MSG = "Imię i Nazwisko nie może zawierac liczb.";
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -42,6 +43,7 @@ public class PersonFormValidator implements Validator {
 			return;
 		}
 
+		checkForNumbers(personForm, errors);
 		checkFieldsLength(personForm, errors);
 		checkExists(personForm, errors);
 	}
@@ -50,6 +52,19 @@ public class PersonFormValidator implements Validator {
 		return personForm.getFirstName() == null || personForm.getLastName() == null;
 	}
 
+	
+	private void checkForNumbers(PersonForm form, Errors errors) {
+		String firstName = form.getFirstName();
+		String lastName = form.getLastName();
+		
+		if (hasNumbers(firstName) || hasNumbers(lastName))
+			errors.reject("has_numbers_error", HAS_NUMBERS_MSG);
+	}
+	
+	private boolean hasNumbers(String name) {
+		return name.matches(".*\\d+.*");
+	}
+	
 	private void checkFieldsLength(PersonForm form, Errors errors) {
 		int firstNameLength = form.getFirstName().length();
 		int lastNameLength = form.getLastName().length();
