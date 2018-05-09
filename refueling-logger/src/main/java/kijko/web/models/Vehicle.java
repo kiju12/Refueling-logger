@@ -1,5 +1,6 @@
 package kijko.web.models;
 
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 
-import kijko.web.models.enums.FuelType;
 import kijko.web.models.enums.VehicleType;
 
 @Entity
@@ -26,9 +26,6 @@ public abstract class Vehicle {
 	
 	@Enumerated(EnumType.STRING)
 	private VehicleType vehicleType;
-	
-	@Enumerated(EnumType.STRING)
-	private FuelType fuelType;
 	
 	public Vehicle() {}
 	
@@ -70,18 +67,6 @@ public abstract class Vehicle {
 
 	public VehicleType getVehicleType() {
 		return vehicleType;
-	}
-
-	public void setVehicleType(VehicleType vehicleType) {
-		this.vehicleType = vehicleType;
-	}
-
-	public FuelType getFuelType() {
-		return fuelType;
-	}
-
-	public void setFuelType(FuelType fuelType) {
-		this.fuelType = fuelType;
 	}
 
 	public Long getId() {

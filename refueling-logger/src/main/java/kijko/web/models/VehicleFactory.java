@@ -1,6 +1,5 @@
 package kijko.web.models;
 
-import kijko.web.models.enums.FuelType;
 import kijko.web.models.forms.VehicleForm;
 
 public abstract class VehicleFactory {
@@ -11,7 +10,6 @@ public abstract class VehicleFactory {
 		car.setModel(form.getModel());
 		car.setYearOfProduction(form.getYearOfProduction());
 		car.setMeterStatus(form.getMeterStatus());
-		car.setFuelType(form.getFuelType());
 		
 		return car;
 	}
@@ -22,7 +20,6 @@ public abstract class VehicleFactory {
 		motorbike.setModel(form.getModel());
 		motorbike.setYearOfProduction(form.getYearOfProduction());
 		motorbike.setMeterStatus(form.getMeterStatus());
-		motorbike.setFuelType(FuelType.PETROL);
 		
 		return motorbike;
 	}
