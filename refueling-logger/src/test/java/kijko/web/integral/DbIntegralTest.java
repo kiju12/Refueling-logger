@@ -56,7 +56,6 @@ public class DbIntegralTest {
 		car = new Car();
 		car.setMark("Mazda");
 		car.setModel("Miata");
-		car.setFuelType(FuelType.OIL);
 		car.setMeterStatus(100L);
 		car.setYearOfProduction(1998L);
 		car = vehService.saveVehicle(car);
@@ -69,6 +68,7 @@ public class DbIntegralTest {
 		refuel.setFuelAmount(BigDecimal.valueOf(20.5));
 		refuel.setPriceForLiterInThisTime(BigDecimal.valueOf(4.50));
 		refuel.setMeterStatusInThisTime(200L);
+		refuel.setFuelType(FuelType.OIL);
 		refuel = refuelService.saveRefueling(refuel);
 	}
 
@@ -108,12 +108,12 @@ public class DbIntegralTest {
 		Vehicle motorbike = new Motorbike();
 		motorbike.setMark("Honda");
 		motorbike.setModel("C");
-		motorbike.setFuelType(FuelType.PETROL);
 		motorbike.setMeterStatus(100L);
 		motorbike.setYearOfProduction(1998L);
 		motorbike = vehService.saveVehicle(motorbike);
 		
 		refuel.setVehicle(motorbike);
+		refuel.setFuelType(FuelType.PETROL);
 		refuel = refuelService.updateRefueling(refuel);
 		
 		assertEquals(refuel.getVehicle().getVehicleType(), VehicleType.MOTORBIKE);
