@@ -1,0 +1,19 @@
+<div>
+    <table>
+        <tr>
+          <th><button (click)="sortByFuelType()">Rodzaj paliwa</button></th>
+          <th><button (click)="sortByAmount()">Ilość</button></th> 
+          <th><button (click)="sortByPerson()">Tankujący</button></th>
+          <th><button (click)="sortByPayment()">Zapłacono</button></th>
+          <th><button (click)="sortByDate()">Data i godzina</button></th>
+        </tr>
+        <tr *ngFor="let refueling of allRefuelings">
+          <td>{{refueling.fuelType}}</td>
+          <td>{{refueling.fuelAmount}} L</td>
+          <td>{{refueling.person.firstName}} {{refueling.person.lastName}}</td>
+          <td>{{refueling.fuelAmount * refueling.priceForLiterInThisTime}} zl</td>
+          <td>{{refueling.date}} {{refueling.time}}</td>
+          <td><button (click)="deleteRefueling(refueling)">Usuń</button></td>
+        </tr>
+      </table>
+</div>
