@@ -8,6 +8,7 @@
       {{vehicle.mark}} {{vehicle.model}} {{vehicle.yearOfProduction}}
     </option>
   </select>
+  <label *ngIf="addRefuelingForm.get('chooseVehicle').errors">Musisz wybrać pojazd.</label>
 
   <label for="choosePerson">Wybierz osobe tankującą: </label>
   <select id="choosePerson" ng-model="data.singleSelect" formControlName="choosePerson">
@@ -15,6 +16,7 @@
       {{person.firstName}} {{person.lastName}}
     </option>
   </select>
+  <label *ngIf="addRefuelingForm.get('choosePerson').errors">Musisz wybrać osobę tankującą.</label>
 
   <label for="meterStatusInThisTime">Przebieg podczas tankowania: </label>
   <input type="number" id="meterStatusInThisTime" formControlName="meterStatusInThisTime" placeholder="Aktualny stan licznika">
@@ -27,17 +29,23 @@
     <input type="radio" name="fuelType" formControlName="fuelType" value="OIL">Ropa
     <input type="radio" name="fuelType" formControlName="fuelType" value="LPG">LPG
   </div>
+  <label *ngIf="addRefuelingForm.get('fuelType').errors">Musisz wybrać rodzaj paliwa.</label>
+
   <label for="litres">Ilość paliwa (w litrach): </label>
   <input type="number" id="litres" formControlName="litres" placeholder="Liczba litrow">
+  <label *ngIf="addRefuelingForm.get('litres').errors">Ilość paliwa nie może być mniejsza od 0.</label>
 
   <label for="priceForLiterInThisTime">Cena za litr: </label>
   <input type="number" id="priceForLiterInThisTime" formControlName="priceForLiterInThisTime" placeholder="Cena za litr">
+  <label *ngIf="addRefuelingForm.get('priceForLiterInThisTime').errors">Cena nie może być mniejsza od 0.</label>
 
   <label>Data: </label>
   <input type="date" id="date" formControlName="date">
+  <label *ngIf="addRefuelingForm.get('date').errors">Wybierz datę</label>
 
   <label>Godzina: </label>
   <input type="time" id="time" formControlName="time">
+  <label *ngIf="addRefuelingForm.get('time').errors">Wybierz czas</label>
 
   <button type="submit" [disabled]="addRefuelingForm.status === 'INVALID'">Dodaj tankowanie</button>
 </form>
