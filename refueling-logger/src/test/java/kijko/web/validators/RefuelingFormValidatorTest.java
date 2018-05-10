@@ -40,7 +40,7 @@ public class RefuelingFormValidatorTest extends ValidatorTest {
 		form = new RefuelingForm<Car>();
 		form.setVehicle(car);
 		form.setPerson(person);
-		form.setDateInString("14.01.1996");
+		form.setDateInString("1996-01-14");
 		form.setFuelType(FuelType.LPG);
 		form.setLitres(14.5);
 		form.setMeterStatusInThisTime(300L);
