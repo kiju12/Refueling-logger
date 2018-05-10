@@ -1,3 +1,15 @@
-<p>
-  add-person works!
-</p>
+<form [formGroup]="addPersonForm" (ngSubmit)="addPerson()">
+  <label for="firstName">Imię:</label>
+  <input type="text" id="firstName" formControlName="firstName" placeholder="Imię">
+  <div *ngIf="addPersonForm.get('firstName').errors">
+    <label>Imię powinno zawierać minimum 3 i maksymalnie 32 znaki.</label>
+  </div>
+
+  <label for="lastName">Nazwisko:</label>
+  <input type="text" id="lastName" formControlName="lastName" placeholder="Nazwisko">
+  <div *ngIf="addPersonForm.get('lastName').errors">
+      <label *ngIf="addPersonForm.get('lastName').errors['minlength'] || addPersonForm.get('lastName').errors['maxlength']">Nazwisko powinno zawierać minimum 3 i maksymalnie 32 znaki.</label>
+      <label *ngIf="addPersonForm.get('lastName').errors.hasDigits">Nazwisko nie może zawierać liczb.</label>
+  </div>
+  <button type="submit" [disabled]="addPersonForm.status === 'INVALID'">Dodaj osobę</button>
+</form>

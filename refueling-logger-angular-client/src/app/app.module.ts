@@ -14,6 +14,8 @@ import { VehicleService } from './services/vehicle.service';
 import { RefuelingService } from './services/refueling.service';
 import { PersonService } from './services/person.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RoutingModule } from './routing-module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    RoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [VehicleService, RefuelingService, PersonService, HttpClient],
   bootstrap: [AppComponent]
