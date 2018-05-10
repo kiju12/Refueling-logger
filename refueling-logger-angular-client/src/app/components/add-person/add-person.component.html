@@ -1,4 +1,4 @@
-<h1 *ngIf="personAdded">Dodano osobę {{lastAddedPerson.firstName}} {{lastAddedPerson.lastName}}</h1>
+<!-- <h1 *ngIf="personAdded">Dodano osobę {{lastAddedPerson.firstName}} {{lastAddedPerson.lastName}}</h1>
 <form [formGroup]="addPersonForm" (ngSubmit)="addPerson()">
   <label for="firstName">Imię:</label>
   <input type="text" id="firstName" formControlName="firstName" placeholder="Imię">
@@ -23,4 +23,67 @@
   </div>
   <label *ngIf="personExistsInDb">Istnieje już osoba o tym imieniu i nazwisku.</label>
   <button type="submit" [disabled]="addPersonForm.status === 'INVALID'">Dodaj osobę</button>
-</form>
+</form> -->
+
+<div class="container">
+  <div class="alert alert-primary text-center" *ngIf="personAdded">
+    Dodano osobę
+    <strong>{{lastAddedPerson.firstName}} {{lastAddedPerson.lastName}}</strong>.
+  </div>
+  <div class="box">
+    <div class="row">
+      <div class="col-4 offset-4">
+        <form [formGroup]="addPersonForm" (ngSubmit)="addPerson()">
+          <div class="row">
+            <div class="col-12 form-group">
+              <div class="col-12">
+                <label for="firstName">Imię:</label>
+              </div>
+              <div class="col-12">
+                <input type="text" id="firstName" formControlName="firstName" placeholder="Imię" class="form-control">
+              </div>
+              <div *ngIf="addPersonForm.get('firstName').errors" class="col-12">
+                <div class="col-12">
+                  <label class="error" *ngIf="addPersonForm.get('firstName').errors['minlength'] || addPersonForm.get('firstName').errors['maxlength']">
+                    Imię powinno zawierać minimum 3 i maksymalnie 32 znaki.
+                  </label>
+                </div>
+                <div class="col-12">
+                  <label class="error" *ngIf="addPersonForm.get('firstName').errors.hasDigits">
+                    Imię nie może zawierać liczb.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <div class="col-12">
+                <label for="lastName">Nazwisko:</label>
+              </div>
+              <div class="col-12">
+                <input type="text" id="lastName" formControlName="lastName" placeholder="Nazwisko" class="form-control">
+              </div>
+              <div *ngIf="addPersonForm.get('lastName').errors" class="col-12">
+                <div *ngIf="addPersonForm.get('lastName').errors" class="col-12">
+                  <label class="error" *ngIf="addPersonForm.get('lastName').errors['minlength'] || addPersonForm.get('lastName').errors['maxlength']">
+                    Nazwisko powinno zawierać minimum 3 i maksymalnie 32 znaki.
+                  </label>
+                </div>
+                <div class="col-12">
+                  <label class="error" *ngIf="addPersonForm.get('lastName').errors.hasDigits">
+                    Nazwisko nie może zawierać liczb.
+                  </label>
+                </div>
+              </div>
+              <div class="col-12">
+                <label class="error" *ngIf="personExistsInDb">Istnieje już osoba o tym imieniu i nazwisku.</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" [disabled]="addPersonForm.status === 'INVALID'" class="btn btn-secondary btn-lg mx-auto d-block">Dodaj osobę</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

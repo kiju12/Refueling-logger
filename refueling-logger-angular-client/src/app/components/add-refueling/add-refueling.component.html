@@ -1,4 +1,4 @@
-<h1 *ngIf="refuelingAdded">Pomyślnie dodano tankowanie nr {{lastAddedRefueling.id}}</h1>
+<!-- <h1 *ngIf="refuelingAdded">Pomyślnie dodano tankowanie nr {{lastAddedRefueling.id}}</h1>
 <h1 *ngIf="refuelingUpdated">Pomyślnie edytowano tankowanie nr {{lastAddedRefueling.id}}</h1>
 <h1 *ngIf="updatingMode">Edycja tankowania nr {{updatingId}}</h1>
 <form [formGroup]="addRefuelingForm" (ngSubmit)="addRefueling()">
@@ -48,4 +48,147 @@
   <label *ngIf="addRefuelingForm.get('time').errors">Wybierz czas</label>
 
   <button type="submit" [disabled]="addRefuelingForm.status === 'INVALID'">Dodaj tankowanie</button>
-</form>
+</form> -->
+
+
+<div class="container">
+
+  <div class="alert alert-primary text-center" *ngIf="refuelingAdded">
+      Pomyślnie dodano tankowanie nr <strong>{{lastAddedRefueling.id}}</strong>
+  </div>
+  <div class="alert alert-primary text-center" *ngIf="refuelingUpdated">
+      Pomyślnie edytowano tankowanie nr <strong>{{lastAddedRefueling.id}}</strong>
+  </div>
+
+  <div class="box">
+    <h3 class="display-4" *ngIf="updatingMode">Edycja tankowania nr {{updatingId}}</h3>
+    <div class="row">
+      <div class="col-4 offset-4">
+        <form [formGroup]="addRefuelingForm" (ngSubmit)="addRefueling()">
+
+          <div class="row">
+
+            <div class="col-12 form-group">
+              <div class="col-12">
+                <label for="chooseVehicle">Wybierz tankowany pojazd: </label>
+              </div>
+              <div class="col-12">
+                <select id="chooseVehicle" ng-model="data.singleSelect" formControlName="chooseVehicle" class="form-control">
+                  <option *ngFor="let vehicle of allVehicles; let i = index" value="{{i}}" (click)="setCurrentVehicle(i)">
+                    {{vehicle.mark}} {{vehicle.model}} {{vehicle.yearOfProduction}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="error" *ngIf="addRefuelingForm.get('chooseVehicle').errors">Musisz wybrać pojazd.</label>
+              </div>
+            </div>
+
+            <div class="col-12 form-group">
+              <div class="col-12">
+                <label for="choosePerson">Wybierz osobe tankującą: </label>
+              </div>
+              <div class="col-12">
+                <select id="choosePerson" ng-model="data.singleSelect" formControlName="choosePerson" class="form-control">
+                  <option *ngFor="let person of allPersons; let i = index" value="{{i}}">
+                    {{person.firstName}} {{person.lastName}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="error" *ngIf="addRefuelingForm.get('choosePerson').errors">Musisz wybrać osobę tankującą.</label>
+              </div>
+            </div>
+
+            <div class="col-12 form-group">
+              <div class="col-12">
+                <label for="meterStatusInThisTime">Przebieg podczas tankowania: </label>
+              </div>
+              <div class="col-12">
+                <input type="number" id="meterStatusInThisTime" formControlName="meterStatusInThisTime" placeholder="Aktualny stan licznika"
+                  class="form-control">
+              </div>
+              <div class="col-12">
+                <label class="error" *ngIf="meterStatusError">Przebieg nie może się zmniejszyć.</label>
+              </div>
+              <div class="col-12">
+                <label class="error">Ostani przebieg pojazdu: {{minMeterStatus}}</label>
+              </div>
+            </div>
+
+            <div class="col-12 form-group">
+              <div class="col-12">
+                <label>Rodzaj tankowanego paliwa: </label>
+              </div>
+              <div class="col-12">
+                <input type="radio" name="fuelType" formControlName="fuelType" value="PETROL">Benzyna
+                <span *ngIf="choosedVehicleType !== 'MOTORBIKE'">
+                  <input type="radio" name="fuelType" formControlName="fuelType" value="OIL">Ropa
+                  <input type="radio" name="fuelType" formControlName="fuelType" value="LPG">LPG
+                </span>
+              </div>
+              <div class="col-12">
+                <label class="error" *ngIf="addRefuelingForm.get('fuelType').errors">Musisz wybrać rodzaj paliwa.</label>
+              </div>
+            </div>
+
+            <div class="col-12 form-group">
+              <div class="col-12">
+                <label for="litres">Ilość paliwa (w litrach): </label>
+              </div>
+              <div class="col-12">
+                <input type="number" id="litres" formControlName="litres" placeholder="Liczba litrow" class="form-control">
+              </div>
+              <div class="col-12">
+                <label class="error" *ngIf="addRefuelingForm.get('litres').errors">Ilość paliwa nie może być mniejsza od 0.</label>
+              </div>
+            </div>
+
+            <div class="col-12 form-group">
+              <div class="col-12">
+                <label for="priceForLiterInThisTime">Cena za litr: </label>
+              </div>
+              <div class="col-12">
+                <input type="number" id="priceForLiterInThisTime" formControlName="priceForLiterInThisTime" placeholder="Cena za litr" class="form-control">
+              </div>
+              <div class="col-12">
+                <label class="error" *ngIf="addRefuelingForm.get('priceForLiterInThisTime').errors">Cena nie może być mniejsza od 0.</label>
+              </div>
+            </div>
+
+            <div class="col-12 form-group">
+              <div class="col-12">
+                <label>Data: </label>
+              </div>
+              <div class="col-12">
+                <input type="date" id="date" formControlName="date" class="form-control">
+              </div>
+              <div class="col-12">
+                <label class="error" *ngIf="addRefuelingForm.get('date').errors">Wybierz datę</label>
+              </div>
+            </div>
+
+            <div class="col-12 form-group">
+              <div class="col-12">
+                <label>Godzina: </label>
+              </div>
+              <div class="col-12">
+                <input type="time" id="time" formControlName="time" class="form-control">
+              </div>
+              <div class="col-12">
+                <label *ngIf="addRefuelingForm.get('time').errors" class="error">Wybierz godzinę</label>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <button type="submit" [disabled]="addRefuelingForm.status === 'INVALID'" class="btn btn-secondary btn-lg mx-auto d-block">Dodaj tankowanie</button>
+            </div>
+
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

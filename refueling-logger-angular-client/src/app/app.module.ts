@@ -16,6 +16,10 @@ import { PersonService } from './services/person.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RoutingModule } from './routing-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FuelTypePipe } from './components/pipes/fuelTypePipe';
+import { RoundPipe } from './components/pipes/roundPipe';
+import { TimePipe } from './components/pipes/timePipe';
+import { VehicleTypePipe } from './components/pipes/vehicleTypePipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AddVehicleComponent,
     AddRefuelingComponent,
     AddPersonComponent,
-    RefuelingDetailsComponent
+    RefuelingDetailsComponent,
+    FuelTypePipe,
+    RoundPipe,
+    TimePipe,
+    VehicleTypePipe
   ],
   imports: [
     BrowserModule,

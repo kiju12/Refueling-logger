@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <div>
   <input type="radio" name="fuelFilter" (click)="filterByFuelType('PETROL')">Benzyna
   <input type="radio" name="fuelFilter" (click)="filterByFuelType('OIL')">Ropa
@@ -12,6 +12,7 @@
           <th><button (click)="sortByPerson()">Tankujący</button></th>
           <th><button (click)="sortByPayment()">Zapłacono</button></th>
           <th><button (click)="sortByDate()">Data i godzina</button></th>
+          <th></th>
         </tr>
         <tr *ngFor="let refueling of allRefuelings" routerLink="/refueling/{{refueling.id}}">
           <td>{{refueling.fuelType}}</td>
@@ -22,4 +23,40 @@
           <td><button (click)="deleteRefueling(refueling)">Usuń</button></td>
         </tr>
       </table>
+</div> -->
+
+<div class="container">
+  <div class="jumbotron">
+    <div class="row">
+      <div id="radio-box" class="col-4 offset-4 rounded">
+        <label class="radio-inline"><input type="radio" name="fuelFilter" (click)="filterByFuelType('PETROL')">Benzyna</label>
+        <label class="radio-inline"><input type="radio" name="fuelFilter" (click)="filterByFuelType('OIL')">Ropa</label>
+        <label class="radio-inline"><input type="radio" name="fuelFilter" (click)="filterByFuelType('LPG')">LPG</label>
+        <label class="radio-inline"><input type="radio" name="fuelFilter" (click)="initList()" checked="checked">Wszystkie</label>
+      </div>
+    </div>
+  </div>
+  <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th><button class="btn btn-outline-secondary" (click)="sortByFuelType()">Rodzaj paliwa</button></th>
+          <th><button class="btn btn-outline-secondary" (click)="sortByAmount()">Ilość</button></th>
+          <th><button class="btn btn-outline-secondary" (click)="sortByPerson()">Tankujący</button></th>
+          <th><button class="btn btn-outline-secondary" (click)="sortByPayment()">Zapłacono</button></th>
+          <th><button class="btn btn-outline-secondary" (click)="sortByDate()">Data i godzina</button></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let refueling of allRefuelings; let i = index" class="link">
+            <td>{{i+1}}</td>
+            <td routerLink="/refueling/{{refueling.id}}">{{refueling.fuelType | fuelType }}</td>
+            <td routerLink="/refueling/{{refueling.id}}">{{refueling.fuelAmount | roundThis}}L</td>
+            <td routerLink="/refueling/{{refueling.id}}">{{refueling.person.firstName}} {{refueling.person.lastName}}</td>
+            <td routerLink="/refueling/{{refueling.id}}">{{refueling.fuelAmount * refueling.priceForLiterInThisTime | roundThis | currency:'PLN'}}</td>
+            <td routerLink="/refueling/{{refueling.id}}">{{refueling.date | date:"dd/MM/yyyy"}} {{refueling.time | time}}</td>
+            <td><button class="btn btn-outline-danger" (click)="deleteRefueling(refueling)">Usuń</button></td>
+          </tr>
+      </tbody>
+    </table>
 </div>
