@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: '', component: RefuelingListComponent },
   { path: 'addvehicle', component: AddVehicleComponent },
   { path: 'addrefueling', component: AddRefuelingComponent },
+  { path: 'updaterefueling/:id', component: AddRefuelingComponent },
   { path: 'addperson', component: AddPersonComponent },
   { path: 'refueling/:id', component: RefuelingDetailsComponent }
 ];

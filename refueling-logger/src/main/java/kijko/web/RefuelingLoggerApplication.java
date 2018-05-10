@@ -68,7 +68,7 @@ public class RefuelingLoggerApplication {
 		RefuelingForm refuelingForm1 = new RefuelingForm();
 		refuelingForm1.setVehicle(vehicle1);
 		refuelingForm1.setPerson(person2);
-		refuelingForm1.setDateInString("14.12.1000");
+		refuelingForm1.setDateInString("1000-12-02");
 		refuelingForm1.setFuelType(FuelType.LPG);
 		refuelingForm1.setLitres(123.3);
 		refuelingForm1.setMeterStatusInThisTime(300L);
@@ -79,7 +79,7 @@ public class RefuelingLoggerApplication {
 		RefuelingForm refuelingForm2 = new RefuelingForm();
 		refuelingForm2.setVehicle(vehicle2);
 		refuelingForm2.setPerson(person1);
-		refuelingForm2.setDateInString("16.12.1001");
+		refuelingForm2.setDateInString("2018-02-14");
 		refuelingForm2.setFuelType(FuelType.PETROL);
 		refuelingForm2.setLitres(123.3);
 		refuelingForm2.setMeterStatusInThisTime(301L);

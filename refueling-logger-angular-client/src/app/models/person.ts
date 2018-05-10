@@ -6,3 +6,8 @@ export class Person {
         public lastName?: string
     ) { }
 }
+
+export interface PersonForm {
+    firstName: string;
+    lastName: string;
+}

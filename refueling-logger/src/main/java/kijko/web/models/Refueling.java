@@ -126,7 +126,7 @@ public class Refueling {
 		BigDecimal fuelAmount = BigDecimal.valueOf(form.getLitres());
 		BigDecimal unitPrice = BigDecimal.valueOf(form.getPriceForLiterInThisTime());
 		
-		LocalDate dateOfRefueling = LocalDate.parse(form.getDateInString(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+		LocalDate dateOfRefueling = LocalDate.parse(form.getDateInString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		LocalTime timeOfRefueling = LocalTime.parse(form.getTimeInString(), DateTimeFormatter.ofPattern("kk:mm"));
 		
 		Refueling newRefueling = new Refueling();

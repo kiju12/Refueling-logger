@@ -1,3 +1,41 @@
-<p>
-  add-vehicle works!
-</p>
+<h1 *ngIf="vehicleAdded">Pomyślnie dodano pojazd {{lastAddedVehicle.mark}} {{lastAddedVehicle.model}}</h1>
+<form [formGroup]="addVehicleForm" (ngSubmit)="addVehicle()">
+  <label for="mark">Marka:</label>
+  <input type="text" id="mark" formControlName="mark" placeholder="Marka">
+  <div *ngIf="addVehicleForm.get('mark').errors">
+    <label *ngIf="addVehicleForm.get('mark').errors['minlength'] || addVehicleForm.get('mark').errors['maxlength']">
+      Długość nazwy marki minimum 2 i maksymalnie 32 znaki.
+    </label>
+  </div>
+
+  <label for="model">Model:</label>
+  <input type="text" id="model" formControlName="model" placeholder="Model">
+  <div *ngIf="addVehicleForm.get('model').errors">
+    <label *ngIf="addVehicleForm.get('model').errors['minlength'] || addVehicleForm.get('model').errors['maxlength']">
+      Długość nazwy modelu minimum 2 i maksymalnie 32 znaki.
+    </label>
+  </div>
+
+  <label for="yearOfProduction">Rok produkcji:</label>
+  <input type="number" id="yearOfProduction" formControlName="yearOfProduction" placeholder="Rok produkcji">
+  <div *ngIf="addVehicleForm.get('yearOfProduction').errors">
+    <label *ngIf="addVehicleForm.get('yearOfProduction').errors['min'] || addVehicleForm.get('yearOfProduction').errors['max']">
+      Rok produkcji musi być większy od 0.
+    </label>
+  </div>
+
+  <label for="meterStatus">Stan licznika:</label>
+  <input type="number" id="meterStatus" formControlName="meterStatus" placeholder="Stan licznika">
+  <div *ngIf="addVehicleForm.get('meterStatus').errors">
+      <label *ngIf="addVehicleForm.get('meterStatus').errors['min'] || addVehicleForm.get('meterStatus').errors['max']">
+        Stan licznika musi być większy od 0.
+      </label>
+  </div>
+
+  <label>Rodzaj pojazdu: </label>
+  <input type="radio" name="vehicleType" (click)="setVehicleType('CAR')" [checked]="vehicleType === 'CAR'">Samochod
+  <input type="radio" name="vehicleType" (click)="setVehicleType('MOTORBIKE')" [checked]="vehicleType === 'MOTORBIKE'">Motor
+  <label *ngIf="vehicleType === null">Musisz wybrać rodzaj pojazdu.</label>
+
+  <button type="submit" [disabled]="addVehicleForm.status === 'INVALID' || vehicleType === null">Dodaj pojazd</button>
+</form>

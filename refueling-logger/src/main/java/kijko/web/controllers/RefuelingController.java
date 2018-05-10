@@ -61,7 +61,7 @@ public class RefuelingController {
 	public Refueling updateCarRefueling(@RequestBody RefuelingForm<Car> form, @PathVariable("id") Long id,
 			BindingResult validationErrors) throws BindException {
 		validator.validate(form, validationErrors);
-		
+		System.out.println(form.getTimeInString());
 		if (validationErrors.hasErrors())
 			throw new BindException(validationErrors);
 		

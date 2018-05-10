@@ -17,6 +17,17 @@ export class Refueling {
     ) { }
 }
 
+export interface RefuelingForm {
+    vehicle: Vehicle;
+    person: Person;
+    meterStatusInThisTime: number;
+    litres: number;
+    priceForLiterInThisTime: number;
+    dateInString: string;
+    timeInString: string;
+    fuelType: FuelType;
+}
+
 export enum FuelType {
     PETROL, OIL, LPG
 }

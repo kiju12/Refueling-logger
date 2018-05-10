@@ -1,3 +1,19 @@
-<p>
-  refueling-details works!
-</p>
+<div *ngIf="refueling">
+  <h1>Tankowanie nr {{refueling.id}}</h1>
+  <p>Data: {{refueling.date}} godzina: {{refueling.time}}</p>
+  <h1>Tankujący: </h1>
+  <p>{{refueling.person.firstName}} {{refueling.person.lastName}}</p>
+  <h1>Pojazd: </h1>
+  <p>Typ: {{refueling.vehicle.vehicleType}}</p>
+  <p>Marka i model: {{refueling.vehicle.mark}} {{refueling.vehicle.model}}</p>
+  <p>Rok produkcji: {{refueling.vehicle.yearOfProduction}} r.</p>
+  <p>Przebieg przy tankowaniu: {{refueling.meterStatusInThisTime}}</p>
+  <h1>Szczegoly tankowania: </h1>
+  <p>Rodzaj paliwa: {{refueling.fuelType}}</p>
+  <p>Ilość: {{refueling.fuelAmount}}</p>
+  <p>Cena za litr: {{refueling.priceForLiterInThisTime}}</p>
+  <p>Łączny rachunek: {{refueling.fuelAmount * refueling.priceForLiterInThisTime}}</p>
+
+  <button (click)="editThisRefueling()">Edytuj</button>
+  <button (click)="deleteThisRefueling()">Usuń z rejestru</button>
+</div>

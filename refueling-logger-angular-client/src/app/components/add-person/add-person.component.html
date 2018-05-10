@@ -1,15 +1,26 @@
+<h1 *ngIf="personAdded">Dodano osobę {{lastAddedPerson.firstName}} {{lastAddedPerson.lastName}}</h1>
 <form [formGroup]="addPersonForm" (ngSubmit)="addPerson()">
   <label for="firstName">Imię:</label>
   <input type="text" id="firstName" formControlName="firstName" placeholder="Imię">
   <div *ngIf="addPersonForm.get('firstName').errors">
-    <label>Imię powinno zawierać minimum 3 i maksymalnie 32 znaki.</label>
+      <label *ngIf="addPersonForm.get('firstName').errors['minlength'] || addPersonForm.get('firstName').errors['maxlength']">
+        Imię powinno zawierać minimum 3 i maksymalnie 32 znaki.
+      </label>
+      <label *ngIf="addPersonForm.get('firstName').errors.hasDigits">
+        Imię nie może zawierać liczb.
+      </label>
   </div>
 
   <label for="lastName">Nazwisko:</label>
   <input type="text" id="lastName" formControlName="lastName" placeholder="Nazwisko">
   <div *ngIf="addPersonForm.get('lastName').errors">
-      <label *ngIf="addPersonForm.get('lastName').errors['minlength'] || addPersonForm.get('lastName').errors['maxlength']">Nazwisko powinno zawierać minimum 3 i maksymalnie 32 znaki.</label>
-      <label *ngIf="addPersonForm.get('lastName').errors.hasDigits">Nazwisko nie może zawierać liczb.</label>
+      <label *ngIf="addPersonForm.get('lastName').errors['minlength'] || addPersonForm.get('lastName').errors['maxlength']">
+        Nazwisko powinno zawierać minimum 3 i maksymalnie 32 znaki.
+      </label>
+      <label *ngIf="addPersonForm.get('lastName').errors.hasDigits">
+        Nazwisko nie może zawierać liczb.
+      </label>
   </div>
+  <label *ngIf="personExistsInDb">Istnieje już osoba o tym imieniu i nazwisku.</label>
   <button type="submit" [disabled]="addPersonForm.status === 'INVALID'">Dodaj osobę</button>
 </form>

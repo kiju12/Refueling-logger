@@ -55,7 +55,7 @@ public class RefuelingFormValidator implements Validator {
 
 	private void checkDateFormat(RefuelingForm<?> reForm, Errors errors) {
 		try {
-			LocalDate.parse(reForm.getDateInString(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+			LocalDate.parse(reForm.getDateInString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		} catch (DateTimeParseException exception) {
 			errors.reject("wrong_date_format");
 		}
